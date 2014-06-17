@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Estimating Gas Mileage</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Estimating Gas Mileage">
+  <meta name="author" content="Jerry Cummings">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Estimating Gas Mileage</h1>
+    <h2>Using Car Weight and the Number of Engine Cylinders</h2>
+    <p>Jerry Cummings<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Available Data</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Standard R distributions typically include the &quot;<strong><em>mtcars</em></strong>&quot; dataset. It contains data on 32 automobile models from 1973-1974.
+<p>
+There are three attributes that are of interest for this study:</p>
+
+<ul>
+<li>wt - weight of the car in U.S. tons</li>
+<li>cyl - number of cylinders in the car&#39;s engine</li>
+<li>mpg - gas mileage (U.S. miles per U.S. gallon)</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>The Model</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>We can easily create a linear model to estimate gas mileage given
+a car&#39;s weight and the number of cylinders in its engine:</p>
+
+<pre><code class="r">model &lt;- lm(mpg ~ wt + cyl, data=mtcars)
+model
+</code></pre>
+
+<pre><code>## 
+## Call:
+## lm(formula = mpg ~ wt + cyl, data = mtcars)
+## 
+## Coefficients:
+## (Intercept)           wt          cyl  
+##       39.69        -3.19        -1.51
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Results</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">model.summary &lt;- summary(model)
+model.summary[4]  # coeffecients
+</code></pre>
+
+<pre><code>## $coefficients
+##             Estimate Std. Error t value  Pr(&gt;|t|)
+## (Intercept)   39.686     1.7150  23.141 3.043e-20
+## wt            -3.191     0.7569  -4.216 2.220e-04
+## cyl           -1.508     0.4147  -3.636 1.064e-03
+</code></pre>
+
+<pre><code class="r">model.summary[8]  # r-squared
+</code></pre>
+
+<pre><code>## $r.squared
+## [1] 0.8302
+</code></pre>
+
+<p>The model isn&#39;t great, but it&#39;s good enough for us to play with.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="d" style="background:;">
+  <hgroup>
+    <h2>Interactive Demonstration</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The following link provides an interactive demonstration of this model:<br>
+<a href="http://jerrymcummings.shinyapps.io/developing-data-products">http://jerrymcummings.shinyapps.io/developing-data-products</a>   </p>
+
+<p>You will be able to set the number of cylinders and the weight of
+the car and see where the resulting predicted mileage fits in with
+the rest of the cars.</p>
+
+<p><img src="/home/jerrymcummings/projects/coursera-developing-data-products/shiny.png" height="350px"/></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Available Data'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='The Model'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Results'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Interactive Demonstration'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
